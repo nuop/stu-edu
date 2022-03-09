@@ -1,24 +1,14 @@
 # stu-edu
 
-## Project setup
-```
-npm install
-```
+## 项目流程
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. 规范代码风格：ESLint
 
-### Compiles and minifies for production
-```
-npm run build
-```
+2. 引入组件库ElmentUI
 
-### Lints and fixes files
-```
-npm run lint
-```
+3. 样式处理Sass
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+4. 路由处理
+
+5. 侧边栏菜单和头部布局
+
