@@ -1,3 +1,4 @@
+import store from '@/store'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -26,6 +27,9 @@ const routes = [
   {
     path: '/',
     component: () => import(/* webpackChunkName: 'layout' */'@/views/layout/layoutIndex'),
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: '',
@@ -41,6 +45,16 @@ const routes = [
         path: '/menu',
         name: 'menu',
         component: () => import(/* webpackChunkName: 'menu' */'@/views/menu/menuIndex')
+      },
+      {
+        path: '/menu/menuCreate',
+        name: 'menu-create',
+        component: () => import(/* webpackChunkName: 'menu-create' */'@/views/menu/menuCreate')
+      },
+      {
+        path: '/menu/:id/menuEdit',
+        name: 'menu-edit',
+        component: () => import(/* webpackChunkName: 'menu-edit' */'@/views/menu/menuEdit')
       },
       {
         path: '/resource',
@@ -79,5 +93,27 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-
+// 全局前置守卫
+router.beforeEach((to, from, next) => {
+  // 验证to路由记录是否需要进行身份认证
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // 验证Vuex的store中的用户信息是否存储
+    if (!store.state.user) {
+      // 未登录，跳转到登录页面
+      return next({
+        name: 'login',
+        query: {
+          // 将本次路由的fullpath传递给login页面
+          // path仅包含路径，fullpage为完整url
+          redirect: to.fullPath
+        }
+      })
+    }
+    // 已登录，允许通过
+    next()
+  } else {
+    // 无需登录，允许通过
+    next()
+  }
+})
 export default router
