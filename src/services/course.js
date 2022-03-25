@@ -44,3 +44,13 @@ export const uploadCourseImage = (data, onUploadProgress) => {
     onUploadProgress
   })
 }
+
+export const getLessonById = lessonId => {
+  return request({
+    mothod: 'GET',
+    url: '/boss/course/lesson/getById',
+    params: {
+      lessonId
+    }
+  })
+}

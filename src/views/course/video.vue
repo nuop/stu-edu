@@ -2,8 +2,10 @@
   <div class="course-video">
     <el-card>
       <div slot="header">课程相关信息</div>
-    </el-card>
-    <el-form>
+      <el-form ref="form" :model="lesson">
+        <el-form-item label="课时名称">
+          <el-input v-model="lesson.theme"></el-input>
+        </el-form-item>
       <el-form-item label="视频上传">
         <input ref="video-file" type="file">
       </el-form-item>
@@ -24,11 +26,13 @@
         <p v-if="isUploadSuccess">视频转码中：{{ isTranscodeSuccess ? '完成' : '正在转吗，请稍等...' }}</p>
       </el-form-item>
     </el-form>
+    </el-card>
   </div>
 </template>
 
 <script>
 import { aliyunImagUploadAddressAndAuth, aliyunVideoUploadAddressAndAuth, aliyunVideoTrancode, getAliyunTranscodePercent } from '@/services/aliyun-upload'
+import { getLessonById } from '@/services/course'
 export default {
   name: 'CourseVideo',
   data () {
@@ -38,13 +42,23 @@ export default {
       videoId: null,
       uploadPercent: 0,
       isUploadSuccess: false,
-      isTranscodeSuccess: false
+      isTranscodeSuccess: false,
+      lesson: {
+        theme: ''
+      }
     }
   },
   created () {
     this.initUploader()
+    if (this.$route.query.lessonId) {
+      this.loadLesson()
+    }
   },
   methods: {
+    async loadLesson () {
+      const { data } = await getLessonById(this.$route.query.lessonId)
+      this.lesson = data.data
+    },
     handleUpload () {
       // 点击上传时重置状态信息
       this.isTranscodeSuccess = false
