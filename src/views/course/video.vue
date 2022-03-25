@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handleUpload">开始上传</el-button>
-        <el-button @click="$couter.push({
+        <el-button @click="$router.push({
           name: 'course-section',
           params: {
             courseId
@@ -40,6 +40,9 @@ export default {
       isUploadSuccess: false,
       isTranscodeSuccess: false
     }
+  },
+  created () {
+    this.initUploader()
   },
   methods: {
     handleUpload () {
@@ -96,10 +99,11 @@ export default {
           console.log('onUploadFailed', uploadInfo, code, message)
         },
         // 文件上传进度，单位：字节
-        onUploadProgress: function (uploadInfo, totalSize, loadedPercent) {
+        onUploadProgress: (uploadInfo, totalSize, loadedPercent) => {
           console.log('onUploadProgress', uploadInfo, totalSize, loadedPercent)
           if (!uploadInfo.isImage) {
             this.uploadPercent = Math.floor(loadedPercent * 100)
+            console.log(this.uploadPercent)
           }
         },
         // 上传凭证超时
