@@ -33,11 +33,14 @@
               编辑
             </el-button>
             <el-button
-            type="success"
+              type="success"
               @click="$router.push({
                 name: 'course-video',
                 params: {
                   courseId
+                },
+                query: {
+                  lessonId: data.id
                 }
               })">
               上传视频

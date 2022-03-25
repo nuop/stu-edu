@@ -34,7 +34,7 @@ const routes = [
       {
         path: '',
         name: 'home',
-        component: () => import(/* webpackChunkName: 'home' */'@/views/layout/layoutIndex')
+        component: () => import(/* webpackChunkName: 'home' */'@/views/home/homeIndex')
       },
       {
         path: '/role',
