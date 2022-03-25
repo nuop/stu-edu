@@ -4,7 +4,20 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       scss: {
-        additionalData: `@import "~@/styles/variables.scss";`
+        additionalData: '@import "~@/styles/variables.scss";'
+      }
+    }
+  },
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    proxy: {
+      '/api': {
+        target: 'http://eduboss.lagounews.com/',
+        changeOrigun: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
       }
     }
   }

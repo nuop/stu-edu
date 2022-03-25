@@ -42,6 +42,12 @@ const routes = [
         component: () => import(/* webpackChunkName: 'role' */'@/views/role/roleIndex')
       },
       {
+        path: '/role/:roleId/alloc-menu',
+        name: 'alloc-menu',
+        component: () => import(/* webpackChunkName: 'alloc-menu' */'@/views/role/alloc-menu'),
+        props: true
+      },
+      {
         path: '/menu',
         name: 'menu',
         component: () => import(/* webpackChunkName: 'menu' */'@/views/menu/menuIndex')
@@ -65,6 +71,28 @@ const routes = [
         path: '/course',
         name: 'course',
         component: () => import(/* webpackChunkName: 'course' */'@/views/course/courseIndex')
+      },
+      {
+        path: '/course/create',
+        name: 'course-create',
+        component: () => import(/* webpackChunkName: 'course-create' */'@/views/course/create')
+      },
+      {
+        path: '/course/edit',
+        name: 'course-edit',
+        component: () => import(/* webpackChunkName: 'course-edit' */'@/views/course/edit')
+      },
+      {
+        path: '/course/:courseId/section',
+        name: 'course-section',
+        component: () => import(/* webpackChunkName: 'course-section' */'@/views/course/section.vue'),
+        props: true
+      },
+      {
+        path: '/course/:courseId/video',
+        name: 'course-video',
+        component: () => import(/* webpackChunkName: 'course-video' */'@/views/course/video.vue'),
+        props: true
       },
       {
         path: '/user',

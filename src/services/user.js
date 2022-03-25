@@ -22,3 +22,25 @@ export const getUserInfo = () => {
     // }
   })
 }
+
+// 用户管理
+
+export const getUserPages = data => {
+  return request({
+    method: 'POST',
+    url: '/boss/user/getUserPages',
+    data
+  })
+}
+
+// 封禁用户
+
+export const forbidUser = userId => {
+  return request({
+    method: 'POST',
+    url: 'boss/user/forbidUser',
+    params: {
+      userId
+    }
+  })
+}

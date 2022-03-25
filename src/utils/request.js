@@ -8,13 +8,13 @@ const request = axios.create({
 })
 
 // 封装URL基地址检测函数
-function getBaseURL (url) {
-  if (url.startsWith('/boss')) {
-    return 'http://eduboss.lagounews.com'
-  } else {
-    return 'http://edufront.lagounews.com'
-  }
-}
+// function getBaseURL (url) {
+//   if (url.startsWith('/boss')) {
+//     return '/api'
+//   } else {
+//     return 'http://edufront.lagounews.com'
+//   }
+// }
 
 // 封装跳转登录页面函数
 function redirectLogin () {
@@ -30,7 +30,7 @@ function redirectLogin () {
 
 request.interceptors.request.use(function (config) {
   // 判断config.url的前缀
-  config.baseURL = getBaseURL(config.url)
+  config.baseURL = '/api'
   // 统一的token信息设置
   // 为了严谨，可以读取store中的user后进行Token检测
   const { user } = store.state
